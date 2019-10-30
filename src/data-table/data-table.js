@@ -552,6 +552,28 @@ export function Unstable_DataTable(props: Props) {
     setHeadlineHeight(entries[0].contentRect.height);
   });
 
+  const sum = ns => ns.reduce((s, n) => s + n, 0);
+  React.useEffect(() => {
+    if (gridRef.current) {
+      const actualWidth = gridRef.current.props.width;
+      const measuredWidth = sum(widths);
+      const offsetWidth = gridRef.current._outerRef.offsetWidth;
+      const clientWidth = gridRef.current._outerRef.clientWidth;
+      const scrollbar = offsetWidth - clientWidth;
+      const remainder = actualWidth - measuredWidth;
+      const padding = remainder / widths.length;
+
+      if (padding > 4) {
+        // apply any remaining width onto the last column
+        const nextWidths = widths.map(w => w + padding);
+        const nextWidth = sum(nextWidths);
+        nextWidths[nextWidths.length - 1] +=
+          actualWidth - nextWidth - scrollbar;
+        setWidths(nextWidths);
+      }
+    }
+  }, [widths]);
+
   return (
     <React.Fragment>
       <MeasureColumnWidths
