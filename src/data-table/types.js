@@ -82,11 +82,15 @@ export type StatefulDataTablePropsT = {|
 
 export type DataTablePropsT = {|
   ...StatefulDataTablePropsT,
+  columnHighlightIndex?: number,
   filters?: Map<string, {description: string}>,
+  onColumnHighlightIndexChange?: (index: number) => void,
+  onRowHighlightIndexChange?: (index: number) => void,
   onSelectMany?: (rows: RowT[]) => void,
   onSelectNone?: () => void,
   onSelectOne?: (row: RowT) => void,
   onSort?: (columnIndex: number) => void,
+  rowHighlightIndex?: number,
   selectedRowIds?: Set<string | number>,
   sortIndex?: number,
   sortDirection?: SortDirectionsT,
@@ -96,7 +100,10 @@ export type DataTablePropsT = {|
 export type StatefulContainerPropsT = {|
   ...StatefulDataTablePropsT,
   children: ({|
+    columnHighlightIndex: number,
     filters: Map<string, {description: string}>,
+    onColumnHighlightIndexChange: (index: number) => void,
+    onRowHighlightIndexChange: (index: number) => void,
     onFilterAdd: (filterParams: {description: string}, title: string) => void,
     onFilterRemove: (title: string) => void,
     onSelectMany: (rows: RowT[]) => void,
@@ -104,6 +111,7 @@ export type StatefulContainerPropsT = {|
     onSelectOne: (row: RowT) => void,
     onSort: (columnIndex: number) => void,
     onTextQueryChange: (query: string) => void,
+    rowHighlightIndex: number,
     selectedRowIds: Set<string | number>,
     sortIndex: number,
     sortDirection: SortDirectionsT,

@@ -162,14 +162,18 @@ export function Unstable_StatefulDataTable(props: StatefulDataTablePropsT) {
       rowActions={props.rowActions}
     >
       {({
+        columnHighlightIndex,
         filters,
+        onColumnHighlightIndexChange,
         onFilterAdd,
         onFilterRemove,
+        onRowHighlightIndexChange,
         onSelectMany,
         onSelectNone,
         onSelectOne,
         onSort,
         onTextQueryChange,
+        rowHighlightIndex,
         selectedRowIds,
         sortIndex,
         sortDirection,
@@ -268,13 +272,17 @@ export function Unstable_StatefulDataTable(props: StatefulDataTablePropsT) {
           >
             <Unstable_DataTable
               batchActions={props.batchActions}
+              columnHighlightIndex={columnHighlightIndex}
               columns={props.columns}
               filters={filters}
+              onColumnHighlightIndexChange={onColumnHighlightIndexChange}
+              onRowHighlightIndexChange={onRowHighlightIndexChange}
               onSelectionChange={props.onSelectionChange}
               onSelectMany={onSelectMany}
               onSelectNone={onSelectNone}
               onSelectOne={onSelectOne}
               onSort={onSort}
+              rowHighlightIndex={rowHighlightIndex}
               rows={props.rows}
               rowActions={props.rowActions}
               rowHeight={props.rowHeight}

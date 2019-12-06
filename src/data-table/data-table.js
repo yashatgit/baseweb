@@ -441,26 +441,35 @@ export function Unstable_DataTable(props: DataTablePropsT) {
     [scrollLeft, setScrollLeft, setRecentlyScrolledX],
   );
 
-  const [rowHighlightIndex, setRowHighlightIndex] = React.useState(-1);
   const handleRowHover = React.useCallback(
-    nextIndex => {
-      setColumnHighlightIndex(-1);
-      if (nextIndex !== rowHighlightIndex) {
-        setRowHighlightIndex(nextIndex);
+    rowIndex => {
+      if (props.onRowHighlightIndexChange) {
+        if (props.onColumnHighlightIndexChange) {
+          props.onColumnHighlightIndexChange(-1);
+        }
+
+        if (rowIndex !== props.rowHighlightIndex) {
+          props.onRowHighlightIndexChange(rowIndex);
+        }
       }
     },
-    [rowHighlightIndex],
+    [props.rowHighlightIndex],
   );
 
-  const [columnHighlightIndex, setColumnHighlightIndex] = React.useState(-1);
   function handleColumnHeaderMouseEnter(columnIndex) {
-    setColumnHighlightIndex(columnIndex);
-    setRowHighlightIndex(-1);
+    if (props.onColumnHighlightIndexChange) {
+      props.onColumnHighlightIndexChange(columnIndex);
+      if (props.onRowHighlightIndexChange) {
+        props.onRowHighlightIndexChange(-1);
+      }
+    }
   }
   function handleColumnHeaderMouseLeave() {
-    // $FlowFixMe - unable to get the state type from react-window
-    if (gridRef.current && !gridRef.current.state.isScrolling) {
-      setColumnHighlightIndex(-1);
+    if (props.onColumnHighlightIndexChange) {
+      // $FlowFixMe - unable to get the state type from react-window
+      if (gridRef.current && !gridRef.current.state.isScrolling) {
+        props.onColumnHighlightIndexChange(-1);
+      }
     }
   }
 
@@ -591,6 +600,7 @@ export function Unstable_DataTable(props: DataTablePropsT) {
     [props.onSort],
   );
 
+  const {columnHighlightIndex = -1, rowHighlightIndex = -1} = props;
   const itemData = React.useMemo(() => {
     return {
       columnHighlightIndex,
@@ -605,10 +615,10 @@ export function Unstable_DataTable(props: DataTablePropsT) {
     };
   }, [
     handleRowHover,
-    columnHighlightIndex,
+    props.columnHighlightIndex,
     isRowSelected,
     isSelectable,
-    rowHighlightIndex,
+    props.rowHighlightIndex,
     rows,
     props.columns,
     handleSelectOne,
