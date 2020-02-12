@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import {Button} from 'baseui/button';
-import ChevronDown from 'baseui/icon/chevron-down';
-import {StatefulPopover, PLACEMENT} from 'baseui/popover';
-import {StatefulMenu} from 'baseui/menu';
+import {Button} from 'spaceweb/button';
+import ChevronDown from 'spaceweb/icon/chevron-down';
+import {StatefulPopover, PLACEMENT} from 'spaceweb/popover';
+import {StatefulMenu} from 'spaceweb/menu';
 
 const ITEMS = [
   {label: 'Item One'},

@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import {Button} from 'baseui/button';
-import Upload from 'baseui/icon/upload';
-import ArrowRight from 'baseui/icon/arrow-right';
+import {Button} from 'spaceweb/button';
+import Upload from 'spaceweb/icon/upload';
+import ArrowRight from 'spaceweb/icon/arrow-right';
 
 export default () => (
   <React.Fragment>

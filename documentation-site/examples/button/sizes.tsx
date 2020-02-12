@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useStyletron} from 'baseui';
+import {useStyletron} from 'spaceweb';
 import {Button, SIZE} from 'spaceweb/button';
 
 export default () => {

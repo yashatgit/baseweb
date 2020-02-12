@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Button} from 'spaceweb/button';
-import {useStyletron} from 'baseui';
+import {useStyletron} from 'spaceweb';
 
 export default () => {
   const [css, theme] = useStyletron();

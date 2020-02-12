@@ -20,6 +20,8 @@ import sizing from '../shared/sizing.js';
 
 import type {ThemeT} from '../../styles/types.js';
 
+import SprLightTheme from '@sprinklr/style-dictionary/lib/default/theme'
+
 export const LightTheme: ThemeT = {
   name: 'light-theme',
   colors: {
@@ -42,4 +44,5 @@ export const LightTheme: ThemeT = {
   zIndex: {
     modal: 2000,
   },
+  spr : SprLightTheme.spr
 };

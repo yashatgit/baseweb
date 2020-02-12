@@ -15,19 +15,20 @@ export const BaseButton = styled<SharedStylePropsT>(
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 0,
-    borderStyle: 'none',
+    borderWidth: '1px',
+    borderStyle: 'solid',
     textDecoration: 'none',
     outline: 'none',
     WebkitAppearance: 'none',
     transitionProperty: 'background',
     transitionDuration: $theme.animation.timing100,
     transitionTimingFunction: $theme.animation.easeOutCurve,
-    cursor: 'pointer',
+    cursor: $disabled ? 'not-allowed' : 'pointer',
+    opacity: $disabled ? '0.6' : '1',
+    lineHeight: '1',
     ':disabled': {
       cursor: 'not-allowed',
-      backgroundColor: $theme.colors.buttonDisabledFill,
-      color: $theme.colors.buttonDisabledText,
+      opacity: '0.6'
     },
     marginLeft: 0,
     marginTop: 0,
@@ -133,16 +134,10 @@ function getLoadingSpinnerColors({$theme, $kind, $disabled}) {
 function getBorderRadiiStyles({$theme, $size, $shape}) {
   let value = $theme.borders.buttonBorderRadius;
 
-  if ($shape === SHAPE.pill) {
-    if ($size === SIZE.compact) {
-      value = '30px';
-    } else if ($size === SIZE.large) {
-      value = '42px';
-    } else {
-      value = '38px';
-    }
-  } else if ($shape === SHAPE.round) {
-    value = '50%';
+  if($size === SIZE.large){
+    value = '0.4rem'
+  } else {
+    value = '0.2rem'
   }
 
   return {
@@ -156,11 +151,11 @@ function getBorderRadiiStyles({$theme, $size, $shape}) {
 function getFontStyles({$theme, $size}) {
   switch ($size) {
     case SIZE.compact:
-      return $theme.typography.font250;
+      return { fontSize : '1.2rem' };
     case SIZE.large:
-      return $theme.typography.font450;
+      return { fontSize : '1.3rem' };;
     default:
-      return $theme.typography.font350;
+      return { fontSize : '1.2rem' };;
   }
 }
 
@@ -169,139 +164,131 @@ function getPaddingStyles({$theme, $size, $shape}) {
   switch ($size) {
     case SIZE.compact:
       return {
-        paddingTop: $theme.sizing.scale400,
-        paddingBottom: $theme.sizing.scale400,
+        paddingTop: '0.55rem',
+        paddingBottom: '0.55rem',
         paddingLeft: iconShape
-          ? $theme.sizing.scale400
-          : $theme.sizing.scale500,
+          ? '1.2rem'
+          : '1.2rem',
         paddingRight: iconShape
-          ? $theme.sizing.scale400
-          : $theme.sizing.scale500,
+          ? '1.2rem'
+          : '1.2rem',
       };
     case SIZE.large:
       return {
-        paddingTop: $theme.sizing.scale600,
-        paddingBottom: $theme.sizing.scale600,
+        paddingTop: '0.9rem',
+        paddingBottom: '0.9rem',
         paddingLeft: iconShape
-          ? $theme.sizing.scale600
-          : $theme.sizing.scale700,
+          ? '1.6rem'
+          : '1.6rem',
         paddingRight: iconShape
-          ? $theme.sizing.scale600
-          : $theme.sizing.scale700,
+          ? '1.6rem'
+          : '1.6rem',
       };
     default:
       return {
-        paddingTop: $theme.sizing.scale550,
-        paddingBottom: $theme.sizing.scale550,
+        paddingTop: '0.55rem',
+        paddingBottom: '0.55rem',
         paddingLeft: iconShape
-          ? $theme.sizing.scale550
-          : $theme.sizing.scale600,
+          ? '1.2rem'
+          : '1.2rem',
         paddingRight: iconShape
-          ? $theme.sizing.scale550
-          : $theme.sizing.scale600,
+          ? '1.2rem'
+          : '1.2rem',
       };
   }
 }
 
 function getKindStyles({$theme, $isLoading, $isSelected, $kind, $disabled}) {
-  if ($disabled) {
-    return {};
-  }
   switch ($kind) {
     case KIND.primary:
-      if ($isSelected) {
+      if ($disabled) {
         return {
-          color: $theme.colors.buttonPrimarySelectedText,
-          backgroundColor: $theme.colors.buttonPrimarySelectedFill,
+          color: $theme.spr['text-05'],
+          backgroundColor: $theme.spr['interactive-01'],
+          borderColor: $theme.spr['interactive-01'],
         };
       }
       return {
-        color: $theme.colors.buttonPrimaryText,
-        backgroundColor: $theme.colors.buttonPrimaryFill,
+        color: $theme.spr['text-05'],
+        backgroundColor: $theme.spr['interactive-01'],
+        borderColor: $theme.spr['interactive-01'],
         ':hover': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonPrimaryActive
-            : $theme.colors.buttonPrimaryHover,
+          backgroundColor: $theme.spr['interactive-hover'],
+          borderColor: $theme.spr['interactive-hover'],
         },
         ':focus': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonPrimaryActive
-            : $theme.colors.buttonPrimaryHover,
+          backgroundColor: $theme.spr['interactive-focus'],
+          borderColor: $theme.spr['interactive-focus'],
         },
         ':active': {
-          backgroundColor: $theme.colors.buttonPrimaryActive,
+          backgroundColor: $theme.spr['interactive-focus'],
+          borderColor: $theme.spr['interactive-focus'],
         },
       };
     case KIND.secondary:
-      if ($isSelected) {
+      if ($disabled) {
         return {
-          color: $theme.colors.buttonSecondarySelectedText,
-          backgroundColor: $theme.colors.buttonSecondarySelectedFill,
+          color: $theme.spr['text-02'],
+          backgroundColor: $theme.spr['ui-01'],
+          borderColor: $theme.spr['interactive-02'],
         };
       }
       return {
-        color: $theme.colors.buttonSecondaryText,
-        backgroundColor: $theme.colors.buttonSecondaryFill,
+        color: $theme.spr['text-02'],
+        backgroundColor: $theme.spr['ui-01'],
+        borderColor: $theme.spr['interactive-02'],
         ':hover': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonSecondaryActive
-            : $theme.colors.buttonSecondaryHover,
+          backgroundColor: $theme.spr['ui-hover'],
         },
         ':focus': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonSecondaryActive
-            : $theme.colors.buttonSecondaryHover,
+          backgroundColor: $theme.spr['ui-focus'],
         },
         ':active': {
-          backgroundColor: $theme.colors.buttonSecondaryActive,
+          backgroundColor: $theme.spr['ui-focus'],
         },
       };
     case KIND.tertiary:
-      if ($isSelected) {
+      if ($disabled) {
         return {
-          color: $theme.colors.buttonTertiarySelectedText,
-          backgroundColor: $theme.colors.buttonTertiarySelectedFill,
+          color: $theme.spr['text-04'],
+          backgroundColor: $theme.spr['ui-01'],
+          borderColor: $theme.spr['interactive-01'],
         };
       }
       return {
-        color: $theme.colors.buttonTertiaryText,
-        backgroundColor: $theme.colors.buttonTertiaryFill,
+        color: $theme.spr['text-04'],
+        backgroundColor: $theme.spr['ui-01'],
+        borderColor: $theme.spr['interactive-01'],
         ':hover': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonTertiaryActive
-            : $theme.colors.buttonTertiaryHover,
+          backgroundColor: $theme.spr['ui-hover'],
         },
         ':focus': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonTertiaryActive
-            : $theme.colors.buttonTertiaryHover,
+          backgroundColor: $theme.spr['ui-focus'],
         },
         ':active': {
-          backgroundColor: $theme.colors.buttonTertiaryActive,
+          backgroundColor: $theme.spr['ui-focus'],
         },
       };
     case KIND.minimal:
-      if ($isSelected) {
+      if ($disabled) {
         return {
-          color: $theme.colors.buttonMinimalSelectedText,
-          backgroundColor: $theme.colors.buttonMinimalSelectedFill,
+          color: $theme.spr['text-04'],
+          backgroundColor: $theme.spr['ui-01'],
+          borderColor: $theme.spr['interactive-01'],
         };
       }
       return {
-        color: $theme.colors.buttonMinimalText,
-        backgroundColor: $theme.colors.buttonMinimalFill,
+        color: $theme.spr['text-04'],
+        backgroundColor: $theme.spr['ui-01'],
+        borderColor: $theme.spr['interactive-01'],
         ':hover': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonMinimalActive
-            : $theme.colors.buttonMinimalHover,
+          backgroundColor: $theme.spr['ui-hover'],
         },
         ':focus': {
-          backgroundColor: $isLoading
-            ? $theme.colors.buttonMinimalActive
-            : $theme.colors.buttonMinimalHover,
+          backgroundColor: $theme.spr['ui-focus'],
         },
         ':active': {
-          backgroundColor: $theme.colors.buttonMinimalActive,
+          backgroundColor: $theme.spr['ui-focus'],
         },
       };
     default:

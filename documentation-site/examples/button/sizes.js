@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import {useStyletron} from 'baseui';
-import {Button, SIZE} from 'baseui/button';
+import {useStyletron} from 'spaceweb';
+import {Button, SIZE} from 'spaceweb/button';
 
 export default () => {
   const [css, theme] = useStyletron();

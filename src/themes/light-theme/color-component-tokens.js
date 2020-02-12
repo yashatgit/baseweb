@@ -13,6 +13,7 @@ import type {ColorTokensT, ComponentColorTokensT} from '../types.js';
 // with values taken from `colorTokens`.
 // Due to the legacy `createTheme` type the value need to be
 // overrideable through primitives (`foundation` )
+
 export default (
   themePrimitives: ColorTokensT = colorTokens,
 ): ComponentColorTokensT => ({
