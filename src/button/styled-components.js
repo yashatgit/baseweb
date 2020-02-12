@@ -17,19 +17,8 @@ export const BaseButton = styled<SharedStylePropsT>(
     flexDirection: $isLoading ? 'column' : 'row',
     alignItems: 'center',
     justifyContent: 'center',
-<<<<<<< HEAD
     borderWidth: '1px',
     borderStyle: 'solid',
-=======
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    borderLeftStyle: 'none',
-    borderTopStyle: 'none',
-    borderRightStyle: 'none',
-    borderBottomStyle: 'none',
->>>>>>> master
     textDecoration: 'none',
     outline: 'none',
     WebkitAppearance: 'none',
