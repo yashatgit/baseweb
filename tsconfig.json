@@ -2,8 +2,8 @@
   "compilerOptions": {
     "lib": ["esnext", "dom"],
     "checkJs": false /* Allow javascript files to be compiled. */,
-    "noEmit": true /* Do not emit outputs. */,
-    "jsx": "preserve",
+    "noEmit": false /* Do not emit outputs. */,
+    "jsx": "react",
 
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,
@@ -29,8 +29,11 @@
     "paths": {
       "spaceweb": ["./src"],
       "spaceweb/*": ["./src/*"]
-    }
+    },
+    "rootDir": "src-ts",
+    "declaration" : true
   },
+  "include": ["src-ts"],
   "exclude": [
     "node_modules",
     "dist",
@@ -38,9 +41,10 @@
     "coverage",
     ".cache",
     "storybook-static",
-    "documentation-site/.next",
+    "documentation-site",
     /* Remove once we added lerna / yarn workspaces */
     "packages/baseweb-vscode-extension",
-    "build"
+    "build",
+    "src"
   ]
 }

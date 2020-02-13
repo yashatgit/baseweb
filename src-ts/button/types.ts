@@ -3,28 +3,11 @@ import {
   StyletronComponent,
   StyletronComponentInjectedProps,
 } from 'styletron-react';
-import {Override} from '../../src/overrides';
+import {KIND,SHAPE,SIZE} from './constants'
+// @ts-ignore
+// import {Override} from '../../src/helpers/overrides';
 
-export interface KIND {
-  primary: 'primary';
-  secondary: 'secondary';
-  tertiary: 'tertiary';
-  minimal: 'minimal';
-}
-
-export interface SIZE {
-  compact: 'compact';
-  default: 'default';
-  large: 'large';
-  mini: 'mini';
-}
-
-export interface SHAPE {
-  default: 'default';
-  pill: 'pill';
-  round: 'round';
-  square: 'square';
-}
+type Override<T> = any
 
 export interface ButtonOverrides {
   BaseButton?: Override<any>;
@@ -36,6 +19,7 @@ export interface ButtonOverrides {
 
 export interface ButtonProps
   extends StyletronComponentInjectedProps<ButtonProps> {
+  forwardedRef?:any;
   href?: string;
   target?: string;
   children?: React.ReactNode;
@@ -59,10 +43,11 @@ export type StyledLoadingSpinner = StyletronComponent<any>;
 export type StyledLoadingSpinnerContainer = StyletronComponent<any>;
 
 export type SharedStylePropsT = {
-  $kind?: keyof KIND,
+  $theme?: any,
+  $kind?: KIND[keyof KIND],
   $isSelected?: boolean,
-  $shape?: keyof SHAPE,
-  $size?: keyof SIZE,
+  $shape?: SHAPE[keyof SHAPE],
+  $size?: SIZE[keyof SIZE],
   $isLoading?: boolean,
   $disabled?: boolean,
 };

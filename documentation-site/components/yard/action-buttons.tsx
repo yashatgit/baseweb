@@ -11,8 +11,10 @@ import {
   MdRotateRight,
 } from 'react-icons/md';
 
-import {Button, KIND, SIZE} from 'spaceweb/button';
+import {Button, KIND, SIZE} from 'dist/button';
 import {ButtonGroup} from 'spaceweb/button-group';
+
+
 
 //@ts-ignore
 import {version} from '../../../package.json';

@@ -12,22 +12,25 @@ import {
   LoadingSpinnerContainer as StyledLoadingSpinnerContainer,
 } from './styled-components.js';
 import {getSharedProps} from './utils.js';
-import ButtonInternals from './button-internals.js';
+import ButtonInternals from './button-internals';
 import {defaultProps} from './default-props.js';
-import {getOverrides} from '../helpers/overrides.js';
+// @ts-ignore
+import {getOverrides} from '../../src/helpers/overrides.js';
 
-import type {ButtonPropsT} from './types.js';
+// const getOverrides = (a,b) => [a,b]
+
+import {ButtonProps} from './types';
 
 // eslint-disable-next-line flowtype/no-weak-types
-class Button extends React.Component<ButtonPropsT & {forwardedRef: any}> {
+class Button extends React.Component<ButtonProps & {forwardedRef: any}> {
   static defaultProps = defaultProps;
 
-  internalOnClick = (...args: *) => {
+  internalOnClick = (e:any) => {
     const {isLoading, onClick} = this.props;
     if (isLoading) {
       return;
     }
-    onClick && onClick(...args);
+    onClick && onClick(e);
   };
 
   render() {
@@ -90,8 +93,8 @@ class Button extends React.Component<ButtonPropsT & {forwardedRef: any}> {
   }
 }
 
-const ForwardedButton = React.forwardRef<ButtonPropsT, HTMLButtonElement>(
-  (props: ButtonPropsT, ref) => <Button forwardedRef={ref} {...props} />,
+const ForwardedButton = React.forwardRef<ButtonProps, HTMLButtonElement>(
+  (props: ButtonProps, ref) => <Button forwardedRef={ref} {...props} />,
 );
 ForwardedButton.displayName = 'Button';
 export default ForwardedButton;
