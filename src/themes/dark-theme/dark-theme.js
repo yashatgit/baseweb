@@ -20,7 +20,7 @@ import sizing from '../shared/sizing.js';
 
 import type {ThemeT} from '../../styles/types.js';
 
-import SprDarkTheme from '@sprinklr/style-dictionary/lib/dark/theme'
+import SprDarkTheme from '@sprinklr/style-dictionary/lib/dark/theme';
 
 export const DarkTheme: ThemeT = {
   name: 'dark-theme',
@@ -44,5 +44,5 @@ export const DarkTheme: ThemeT = {
   zIndex: {
     modal: 2000,
   },
-  spr : SprDarkTheme.spr,
+  spr: SprDarkTheme.spr,
 };

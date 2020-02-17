@@ -4,12 +4,11 @@ Copyright (c) 2018-2020 Uber Technologies, Inc.
 This source code is licensed under the MIT license found in the
 LICENSE file in the root directory of this source tree.
 */
-// @flow
-import {styled} from '../styles/index.js';
-import {KIND, SIZE, SHAPE} from './constants.js';
-import type {SharedStylePropsT} from './types.js';
 
-export const BaseButton = styled<SharedStylePropsT>(
+import {styled} from '../styles/index.js';
+import {KIND, SIZE, SHAPE} from 'baseui/button';
+
+export const BaseButton = styled(
   'button',
   ({$theme, $size, $kind, $shape, $isLoading, $isSelected, $disabled}) => ({
     display: 'inline-flex',
@@ -30,7 +29,7 @@ export const BaseButton = styled<SharedStylePropsT>(
     lineHeight: '1',
     ':disabled': {
       cursor: 'not-allowed',
-      opacity: '0.6'
+      opacity: '0.6',
     },
     marginLeft: 0,
     marginTop: 0,
@@ -44,13 +43,13 @@ export const BaseButton = styled<SharedStylePropsT>(
   }),
 );
 
-export const EndEnhancer = styled<SharedStylePropsT>('div', ({$theme}) => ({
+export const EndEnhancer = styled('div', ({$theme}) => ({
   display: 'flex',
   [$theme.direction === 'rtl' ? 'marginRight' : 'marginLeft']: $theme.sizing
     .scale500,
 }));
 
-export const StartEnhancer = styled<SharedStylePropsT>('div', ({$theme}) => ({
+export const StartEnhancer = styled('div', ({$theme}) => ({
   display: 'flex',
   [$theme.direction === 'rtl' ? 'marginLeft' : 'marginRight']: $theme.sizing
     .scale500,
@@ -60,47 +59,44 @@ export const LoadingSpinnerContainer = styled('div', {
   position: 'static',
 });
 
-export const LoadingSpinner = styled<SharedStylePropsT>(
-  'div',
-  ({$theme, $kind, $disabled}) => {
-    const {foreground, background} = getLoadingSpinnerColors({
-      $theme,
-      $kind,
-      $disabled,
-    });
-    return {
-      height: $theme.sizing.scale600,
-      width: $theme.sizing.scale600,
-      borderTopLeftRadius: '50%',
-      borderTopRightRadius: '50%',
-      borderBottomRightRadius: '50%',
-      borderBottomLeftRadius: '50%',
-      borderLeftStyle: 'solid',
-      borderTopStyle: 'solid',
-      borderRightStyle: 'solid',
-      borderBottomStyle: 'solid',
-      borderLeftWidth: $theme.sizing.scale0,
-      borderTopWidth: $theme.sizing.scale0,
-      borderRightWidth: $theme.sizing.scale0,
-      borderBottomWidth: $theme.sizing.scale0,
-      borderTopColor: foreground,
-      borderLeftColor: background,
-      borderBottomColor: background,
-      borderRightColor: background,
-      animationDuration: $theme.animation.timing700,
-      animationTimingFunction: 'linear',
-      animationIterationCount: 'infinite',
-      animationName: {
-        to: {
-          transform: 'rotate(360deg)',
-        },
-        from: {
-          transform: 'rotate(0deg)',
-        },
+export const LoadingSpinner = styled('div', ({$theme, $kind, $disabled}) => {
+  const {foreground, background} = getLoadingSpinnerColors({
+    $theme,
+    $kind,
+    $disabled,
+  });
+  return {
+    height: $theme.sizing.scale600,
+    width: $theme.sizing.scale600,
+    borderTopLeftRadius: '50%',
+    borderTopRightRadius: '50%',
+    borderBottomRightRadius: '50%',
+    borderBottomLeftRadius: '50%',
+    borderLeftStyle: 'solid',
+    borderTopStyle: 'solid',
+    borderRightStyle: 'solid',
+    borderBottomStyle: 'solid',
+    borderLeftWidth: $theme.sizing.scale0,
+    borderTopWidth: $theme.sizing.scale0,
+    borderRightWidth: $theme.sizing.scale0,
+    borderBottomWidth: $theme.sizing.scale0,
+    borderTopColor: foreground,
+    borderLeftColor: background,
+    borderBottomColor: background,
+    borderRightColor: background,
+    animationDuration: $theme.animation.timing700,
+    animationTimingFunction: 'linear',
+    animationIterationCount: 'infinite',
+    animationName: {
+      to: {
+        transform: 'rotate(360deg)',
       },
-    };
-  },
-);
+      from: {
+        transform: 'rotate(0deg)',
+      },
+    },
+  };
+});
 
 function getLoadingSpinnerColors({$theme, $kind, $disabled}) {
   if ($disabled) {
@@ -141,10 +137,10 @@ function getLoadingSpinnerColors({$theme, $kind, $disabled}) {
 function getBorderRadiiStyles({$theme, $size, $shape}) {
   let value = $theme.borders.buttonBorderRadius;
 
-  if($size === SIZE.large){
-    value = '0.4rem'
+  if ($size === SIZE.large) {
+    value = '0.4rem';
   } else {
-    value = '0.2rem'
+    value = '0.2rem';
   }
 
   return {
@@ -160,11 +156,11 @@ function getFontStyles({$theme, $size}) {
     case SIZE.mini:
       return $theme.typography.font150;
     case SIZE.compact:
-      return { fontSize : '1.2rem' };
+      return {fontSize: '1.2rem'};
     case SIZE.large:
-      return { fontSize : '1.3rem' };;
+      return {fontSize: '1.3rem'};
     default:
-      return { fontSize : '1.2rem' };;
+      return {fontSize: '1.2rem'};
   }
 }
 
@@ -186,34 +182,22 @@ function getPaddingStyles({$theme, $size, $shape}) {
       return {
         paddingTop: '0.55rem',
         paddingBottom: '0.55rem',
-        paddingLeft: iconShape
-          ? '1.2rem'
-          : '1.2rem',
-        paddingRight: iconShape
-          ? '1.2rem'
-          : '1.2rem',
+        paddingLeft: iconShape ? '1.2rem' : '1.2rem',
+        paddingRight: iconShape ? '1.2rem' : '1.2rem',
       };
     case SIZE.large:
       return {
         paddingTop: '0.9rem',
         paddingBottom: '0.9rem',
-        paddingLeft: iconShape
-          ? '1.6rem'
-          : '1.6rem',
-        paddingRight: iconShape
-          ? '1.6rem'
-          : '1.6rem',
+        paddingLeft: iconShape ? '1.6rem' : '1.6rem',
+        paddingRight: iconShape ? '1.6rem' : '1.6rem',
       };
     default:
       return {
         paddingTop: '0.55rem',
         paddingBottom: '0.55rem',
-        paddingLeft: iconShape
-          ? '1.2rem'
-          : '1.2rem',
-        paddingRight: iconShape
-          ? '1.2rem'
-          : '1.2rem',
+        paddingLeft: iconShape ? '1.2rem' : '1.2rem',
+        paddingRight: iconShape ? '1.2rem' : '1.2rem',
       };
   }
 }
